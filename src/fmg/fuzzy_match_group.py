@@ -49,7 +49,7 @@ def fuzzy_match_group(
     not_takens = []
     for i, j, score in candidates:
         if i not in i_taken and j not in j_taken:
-            pairs.append({'a': a_rows[i], 'b': b_rows[j], 'score': score})
+            not_takens.append({'a': a_rows[i], 'b': b_rows[j], 'score': score})
 
     no_match = {'a': [], 'b': []}
     for i in range(len(a_rows)):
