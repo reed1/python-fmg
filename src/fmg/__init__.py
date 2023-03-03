@@ -1,1 +1,1 @@
-from .fuzzy_match_group import fuzzy_match_group
+from .fuzzy_match_group import fuzzy_match_group, report_forced_matches
