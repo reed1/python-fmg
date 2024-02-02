@@ -104,16 +104,13 @@ def show_fzf(not_takens, fzf_header):
             ' | '.join([str(e[k]) for k in ['score', 'a_value', 'b_value']])
             for e in not_takens
         ]
-        try:
-            res = subprocess.run(
-                ['fzf', *(['--header', str(fzf_header)] if fzf_header else [])],
-                input='\n'.join(lines),
-                text=True,
-                check=True,
-                stdout=subprocess.PIPE
-            )
-        except Exception as e:
-            break
+        res = subprocess.run(
+            ['fzf', *(['--header', str(fzf_header)] if fzf_header else [])],
+            input='\n'.join(lines),
+            text=True,
+            check=True,
+            stdout=subprocess.PIPE
+        )
         line = res.stdout.strip()
         i = lines.index(line)
         a = not_takens[i]['a']
