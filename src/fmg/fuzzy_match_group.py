@@ -13,7 +13,9 @@ def fuzzy_match_group(
         min_score=85,
         forced_matches=[],
         resolve_with_fzf=True,
-        fzf_header=None):
+        fzf_header=None,
+        source_must_all_match=True,
+        ):
     pairs = []
     a_rows = a_rows[:]
     b_rows = b_rows[:]
@@ -89,6 +91,8 @@ def fuzzy_match_group(
         a_value = p['a'][a_field] if a_field is not None else p['a']
         b_value = p['b'][b_field] if b_field is not None else p['b']
         mapping[a_value] = b_value
+    if source_must_all_match:
+        assert len(no_match['a']) == 0
     return {
         'pairs': pairs,
         'no_match': no_match,
