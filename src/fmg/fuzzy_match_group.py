@@ -1,3 +1,4 @@
+import sys
 from thefuzz import fuzz
 import subprocess
 import json
@@ -92,7 +93,13 @@ def fuzzy_match_group(
         b_value = p['b'][b_field] if b_field is not None else p['b']
         mapping[a_value] = b_value
     if source_must_all_match:
-        assert len(no_match['a']) == 0
+        if len(no_match['a']) > 0:
+            print('These a values have no match:', file=sys.stderr)
+            for e in no_match['a']:
+                a_value = e[a_field] if a_field is not None else e
+                print([a_value], file=sys.stderr)
+            raise Exception('Some a values have no match')
+
     return {
         'pairs': pairs,
         'no_match': no_match,
